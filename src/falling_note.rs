@@ -10,7 +10,7 @@ pub struct FallingNote {
     pub velocity: f32,
 }
 
-pub fn draw_falling_notes(model: &Model, draw: &Draw) {
+pub fn draw_falling_notes(draw: &Draw, model: &Model) {
     for note in model.falling_notes.iter() {
         draw.rect()
             .xy(note.position)

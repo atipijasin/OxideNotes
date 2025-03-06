@@ -5,10 +5,9 @@ use crate::model::Model;
 
 pub fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
+    init_piano_keyboard(&draw, app.window_rect());
+    draw_falling_notes(&draw, model);
 
     draw.background().color(BLACK);
-
-    init_piano_keyboard(&draw, app.window_rect());
-    draw_falling_notes(model, &draw);
     draw.to_frame(app, &frame).unwrap();
 }
