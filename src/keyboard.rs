@@ -7,7 +7,7 @@ pub enum KeyColor {
     White,
 }
 
-pub fn init_piano_keyboard(draw: &Draw, window: Rect) {
+pub fn  init_piano_keyboard(draw: &Draw, window: Rect) {
     let total_white_keys = 52;
     let is_black_key = [false, true, false, true, false, false, true, false, true, false, true, false];
 
