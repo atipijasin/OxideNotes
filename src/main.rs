@@ -3,6 +3,7 @@ mod keyboard;
 mod model;
 mod update;
 mod view;
+mod midi;
 
 use view::view;
 use update::update;
