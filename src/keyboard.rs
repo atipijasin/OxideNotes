@@ -36,7 +36,7 @@ pub fn init_piano_keyboard(draw: &Draw, window: Rect) {
             let prev_white_index = white_key_to_midi.iter().position(|&k| k == current_midi_note - 1);
             if let Some(index) = prev_white_index {
                 let x = white_key_positions[index];
-                let y = -window.h() / 2.0 + window.h() * 0.2 - window.h() * 0.2 * 0.6 / 2.0;
+                let y = -window.h() * 0.36;
 
                 draw_key(&draw, x, y, KeyColor::Black, window);
             }
