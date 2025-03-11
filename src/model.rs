@@ -1,17 +1,30 @@
 use nannou::prelude::*;
 use crate::falling_note::FallingNote;
+use crate::midi::{read_file, MidiNote};
 
 pub struct Model {
     pub falling_notes: Vec<FallingNote>,
+    pub time: f32,
+    pub midi_notes: Vec<MidiNote>,
+    pub active_note_indices: Vec<usize>,
 }
 
-pub fn model(app: &App) -> Model {
+pub fn model(_: &App) -> Model {
+    let midi_notes = match read_file("midi_example.mid") {
+        Ok(notes) => {
+            println!("Successfully read {} notes", notes.len());
+            notes
+        }
+        Err(e) => {
+            eprintln!("Error reading midi file: {}", e);
+            vec![]
+        },
+    };
+
     Model {
-        falling_notes: vec![FallingNote {
-            position: pt2(0.0, app.window_rect().top()),
-            width: 20.0,
-            height: 80.0,
-            velocity: 2.0, // pixels per frame
-        }]
+        falling_notes: Vec::new(),
+        time: 0.0,
+        midi_notes,
+        active_note_indices: Vec::new(),
     }
 }
