@@ -4,6 +4,7 @@ use nannou::Draw;
 use nannou::geom::Point2;
 
 pub struct FallingNote {
+    pub id: String,
     pub position: Point2,
     pub width: f32,
     pub height: f32,
