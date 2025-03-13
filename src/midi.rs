@@ -30,10 +30,9 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<Vec<MidiNote>, Box<dyn std::
 
     let mut notes = Vec::new();
     let mut active_notes = HashMap::new();
-    let mut current_time_ticks: u64 = 0;
 
     for track in smf.tracks {
-        current_time_ticks = 0;
+        let mut current_time_ticks: u64 = 0;
         for event in track {
             current_time_ticks += event.delta.as_int() as u64;
             let current_time_seconds = current_time_ticks as f64 / ticks_per_second;
@@ -43,7 +42,7 @@ pub fn read_file<P: AsRef<Path>>(path: P) -> Result<Vec<MidiNote>, Box<dyn std::
                     MidiMessage::NoteOn { key, vel } if vel.as_int() > 0 => {
                         active_notes.insert((channel.as_int(), key.as_int()), current_time_seconds);
                     }
-                    MidiMessage::NoteOff { key, vel } | MidiMessage::NoteOn { key, vel } => {
+                    MidiMessage::NoteOff { key, vel: _ } | MidiMessage::NoteOn { key, vel: _ } => {
                         if let Some(start_time) = active_notes.remove(&(channel.as_int(), key.as_int()))
                         {
                             notes.push(MidiNote {

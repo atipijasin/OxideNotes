@@ -8,7 +8,7 @@ use crate::keyboard::keyboard_height;
 
 pub fn update(app: &App, model: &mut Model, update: Update) {
     model.time += update.since_last.as_secs_f32();
-    for (i, note) in model.midi_notes.iter().enumerate() {
+    for note in model.midi_notes.iter() {
         let x = map_range(
             note.note_number as f32,
             21.0,
@@ -40,11 +40,11 @@ pub fn update(app: &App, model: &mut Model, update: Update) {
     model.falling_notes.retain(|note|  {
         let result = note.position.y - (note.height * 0.5) > -app.window_rect().h() * 0.5 + keyboard_height(app.window_rect());
         if !result { model.expired_note_ids.push(note.id.clone()); }
-        return result
+        result
     })
 }
 
-fn should_show_note(start_time: f64, current_time: f64, current_fallng_notes: &Vec<FallingNote>, current_expired_note_ids: &Vec<String>, note_number: u8) -> bool {
+fn should_show_note(start_time: f64, current_time: f64, current_fallng_notes: &[FallingNote], current_expired_note_ids: &[String], note_number: u8) -> bool {
     // TODO refactor this mess..
     start_time < current_time && !current_fallng_notes.iter().any(|n| { n.id == note_number.to_string() + " " + start_time.to_string().as_str() })  && !current_expired_note_ids.iter().any(|note_id| note_id.clone() == (note_number.to_string() + " " + start_time.to_string().as_str()))
 }

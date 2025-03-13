@@ -27,7 +27,7 @@ pub fn  init_piano_keyboard(draw: &Draw, window: Rect) {
         let x = -window.w() / 2.0 + (i as f32 + 0.5) * white_key_width(window);
         let y = -window.h() / 2.0 + window.h() * 0.2 / 2.0;
 
-        draw_key(&draw, x, y, KeyColor::White, window);
+        draw_key(draw, x, y, KeyColor::White, window);
     }
 
     current_midi_note = START_NOTE;
@@ -38,7 +38,7 @@ pub fn  init_piano_keyboard(draw: &Draw, window: Rect) {
                 let x = white_key_positions[index];
                 let y = -window.h() * 0.36;
 
-                draw_key(&draw, x, y, KeyColor::Black, window);
+                draw_key(draw, x, y, KeyColor::Black, window);
             }
         }
         current_midi_note += 1;
