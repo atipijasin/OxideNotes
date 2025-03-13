@@ -45,7 +45,7 @@ pub fn  init_piano_keyboard(draw: &Draw, window: Rect) {
     }
 }
 
-fn keyboard_height(window: Rect) -> f32 { window.h() * 0.2 }
+pub fn keyboard_height(window: Rect) -> f32 { window.h() * 0.2 }
 fn white_key_width(window: Rect) -> f32 { window.w() / (52.0) }
 
 fn draw_key(draw: &Draw, x: f32, y: f32, color: KeyColor, window: Rect) {

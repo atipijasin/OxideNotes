@@ -6,6 +6,7 @@ pub struct Model {
     pub falling_notes: Vec<FallingNote>,
     pub time: f32,
     pub midi_notes: Vec<MidiNote>,
+    pub expired_note_ids: Vec<String>,
     pub active_note_indices: Vec<usize>,
 }
 
@@ -26,5 +27,6 @@ pub fn model(_: &App) -> Model {
         time: 0.0,
         midi_notes,
         active_note_indices: Vec::new(),
+        expired_note_ids: Vec::new(),
     }
 }
